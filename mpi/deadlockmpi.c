@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include "mpi.h"
+//it turns out the deadlock does not happen,,,
+//https://www.dartmouth.edu/~rc/classes/intro_mpi/mpi_race_conditions.html
 
-
-int main(int argc, char const *argv[])
+int main(int argc, char  *argv[])
 {
 	MPI_Init(&argc, &argv);
 
@@ -11,18 +12,20 @@ int main(int argc, char const *argv[])
 	int world_size;
 	MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
-	int number;
+	int a[10000] ,b[10000];
+	MPI_Status s;
 	if (world_rank == 0) {
-	    number = -1;
-	    MPI_Request r;
-	    MPI_Isend(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, &r);
-	} else if (world_rank == 1) {
-	    MPI_Irecv(&number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD,
-	             MPI_STATUS_IGNORE);
-	    printf("Process 1 received number %d from process 0\n",
-	           number);
-	}
+	    MPI_Send(&a, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
+	    MPI_Recv(&b, 1, MPI_INT, 1, 0, MPI_COMM_WORLD,
+	    		&s);
+	} 
+	else if (world_rank == 1) {
+		MPI_Send(&a, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+		MPI_Recv(&b, 1, MPI_INT, 0, 0, MPI_COMM_WORLD,
+				&s);
 
+	}
+	printf("rank %d now with %d,%d\n",world_rank,a,b);
 	MPI_Finalize();
 	return 0;
 }
