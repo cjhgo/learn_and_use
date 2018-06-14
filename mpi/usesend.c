@@ -2,7 +2,7 @@
 #include "mpi.h"
 
 
-int main(int argc, char const *argv[])
+int main(int argc, char  *argv[])
 {
 	MPI_Init(&argc, &argv);
 
@@ -15,7 +15,8 @@ int main(int argc, char const *argv[])
 	if (world_rank == 0) {
 	    number = -1;
 	    MPI_Send(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
-	} else if (world_rank == 1) {
+	} 
+	else if (world_rank == 1) {
 		MPI_Status s;
 	    MPI_Recv(&number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD,
 	    		&s);
@@ -27,29 +28,3 @@ int main(int argc, char const *argv[])
 	MPI_Finalize();
 	return 0;
 }
-/**
-#include <stdio.h>
-#include "mpi.h"
-
-
-int main(int argc, char const *argv[])
-{
-	int taskid;
-	MPI_Init(&argc, &argv);
-	MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
-	printf("i am rank %d\n", taskid);
-	if (taskid == 0)
-	{
-		MPI_Send(55,1,MPI_INT, 1, 99, MPI_COMM_WORLD);
-	}
-	if (taskid == 1)
-	{
-		int t;
-		MPI_Status s;
-		MPI_Recv(&t,1,MPI_INT, 0, 99, MPI_COMM_WORLD,&s);
-		printf("rank %d reev %d\n", taskid, t );	
-	}
-	MPI_Finalize();
-	return 0;
-}
-**/
