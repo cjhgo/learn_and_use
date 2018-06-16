@@ -25,7 +25,7 @@ int main(int argc, char  *argv[])
 				&s);
 
 	}
-	printf("rank %d now with %d,%d\n",world_rank,a,b);
+	printf("rank %d now with %d,%d\n",world_rank,(int)a,(int)b);
 	MPI_Finalize();
 	return 0;
 }
