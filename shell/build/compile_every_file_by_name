@@ -1,0 +1,24 @@
+CFLAGS = -Wall
+LIBS  = -lm
+CC=mpicc
+
+//The Function wildcard
+//$(wildcard pattern…)
+//SRCS="a.c b.c c.c g.c"
+SRCS = $(wildcard *.c)
+
+//Functions for String Substitution patsubst
+//$(patsubst pattern,replacement,text)
+//PROGS="a b c  g" 
+PROGS = $(patsubst %.c,../bin/mpi/%,$(SRCS))
+
+
+//all depend a series of target
+all: $(PROGS)
+
+//% pattern rule
+// for every target mathch the rule, how to build
+//没有什么神奇之处
+//刚好这里的rule match了all所依赖的一系列target
+../bin/mpi/%: %.c
+	$(CC) $(CFLAGS) -o $@ $<  $(LIBS)
