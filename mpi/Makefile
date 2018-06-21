@@ -3,9 +3,9 @@ LIBS  = -lm
 CC=mpicc
 SRCS = $(wildcard *.c)
 
-PROGS = $(patsubst %.c,%,$(SRCS))
+PROGS = $(patsubst %.c,../bin/mpi/%,$(SRCS))
 
 all: $(PROGS)
 
-%: %.c
-	$(CC) $(CFLAGS) -o "bin/$@" $<  $(LIBS)
+../bin/mpi/%: %.c
+	$(CC) $(CFLAGS) -o $@ $<  $(LIBS)
