@@ -1,20 +1,11 @@
-TARGET =	pg
-OBJS =		main.o
+CFLAGS = -Wall -g
+LIBS  = -lm
+CXX=/usr/bin/g++-6
+SRCS = $(wildcard *.cpp)
 
-CC =		gcc
-CFLAGS =	-Wall -D_GNU_SOURCE
-LDFLAGS =	-pthread
+PROGS = $(patsubst %.cpp,../../bin/cpp/%,$(SRCS))
 
-all: $(TARGET)
+all: $(PROGS)
 
-$(TARGET): $(OBJS)
-	$(CC) $(OBJS) $(LDFLAGS) -o $(TARGET)
-
-%.o: %.c
-	$(CC) $(CFLAGS) $< -c -o $@
-
-clean:
-	rm -f $(TARGET)
-	rm -f $(OBJS)
-
-call: clean all
+../../bin/cpp/%: %.cpp
+	$(CXX) $(CFLAGS) -o $@ $<  $(LIBS)
