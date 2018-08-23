@@ -1,5 +1,6 @@
 #include <bitset>
 #include <iostream>
+#include "dense_bitset.hpp"
 using namespace std;
 /*
 Printing numbers in binary format in C++
@@ -7,5 +8,44 @@ Printing numbers in binary format in C++
 int main()
 {
   int x=998;
-  cout<<bitset<32>(x)<<endl;
+  bitset<32>y(x);
+  cout<<y<<endl;
+  // 00000000000000000000001111100110
+  for(int i = 0; i < y.size();i++)
+    cout<<y[i];
+  cout<<endl;
+  // 01100111110000000000000000000000
+  // 注意字节序不一样
+  
+
+  //denbse_bitset 只输出有效位
+  graphlab::fixed_dense_bitset<128> fdb;
+  graphlab::dense_bitset db;
+  
+  fdb.set_bit(0);
+  fdb.set_bit(32);
+  fdb.set_bit(65);
+  
+  for(auto e: fdb)
+    cout<<e<<endl;
+  // 0 32 65
+
+  db.resize(32);
+  db.set_bit(1);
+  db.set_bit(3);
+  db.set_bit(7);
+  for(auto e: db)
+    cout<<e<<endl;
+  // 1 3 7
+
+
+  size_t vid = 70;
+  size_t vid_block = fdb.containing_word(vid);
+  graphlab::fixed_dense_bitset<64> local_bitset;
+  local_bitset.initialize_from_mem(&vid_block, 8);
+  for(auto e: local_bitset)
+  cout<<64+e;
+
+  cout<<endl;
+
 }
