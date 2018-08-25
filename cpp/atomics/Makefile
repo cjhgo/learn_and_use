@@ -1,11 +1,11 @@
 CFLAGS = -Wall -g
-LIBS  = -lm
+LIBS  = -lm -lpthread
 CXX=/usr/bin/g++-6
 SRCS = $(wildcard *.cpp)
 
-PROGS = $(patsubst %.cpp,../../bin/cpp/%,$(SRCS))
+PROGS = $(patsubst %.cpp,../../bin/cpp/atomics/%,$(SRCS))
 
 all: $(PROGS)
 
-../../bin/cpp/%: %.cpp
+../../bin/cpp/atomics/%: %.cpp
 	$(CXX) $(CFLAGS) -o $@ $<  $(LIBS)

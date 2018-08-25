@@ -1,3 +1,6 @@
+/**
+ * demo to demonstrate the basic usage of pthread
+ * */
 #include<iostream>
 #include<pthread.h>
 using namespace std;
