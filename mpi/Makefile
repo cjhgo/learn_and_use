@@ -1,4 +1,4 @@
-CFLAGS = -Wall
+CFLAGS = -Wall -std=c99
 LIBS  = -lm
 CC=mpicc
 SRCS = $(wildcard *.c)

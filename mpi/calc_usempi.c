@@ -12,7 +12,7 @@ int main(int argc, char  *argv[])
 	MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
 	MPI_Comm_rank(MPI_COMM_WORLD,&myid);
 	
-	n=pow(10,4);
+	n=pow(10,8);
 	Sum=sum = 0.0;
 	w = 1.0/n;
 	printf("%d\n", numprocs);
