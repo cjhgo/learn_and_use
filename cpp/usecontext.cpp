@@ -8,14 +8,15 @@
            do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
        static void
-       func1(int arg)
+       //func1(int arg)
+       func1(void)
        {
            printf("func1: started\n");
            printf("func1: swapcontext(&uctx_func1, &uctx_func2)\n");
            if (swapcontext(&uctx_func1, &uctx_func2) == -1)
                handle_error("swapcontext");
            printf("func1: returning\n");
-           printf("func1: %d\n", arg);
+           printf("func1: %d\n", 11);
        }
 
        static void

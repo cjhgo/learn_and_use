@@ -7,7 +7,7 @@ int main(int argc, char const *argv[])
 	for(double e : v)
 	{
 		std::cout<<e<<std::endl;
-	}comtypere	
+	}
 	v={0,1,3,4};
 	for(double e : v)
 	{

@@ -14,10 +14,7 @@ public:
     {
         return 999;
     }
-    // int operator()
-    // {
-    //     return 999;
-    // }
+
     operator A()
     {
         return A(a);
@@ -32,3 +29,8 @@ int main(int argc, char const *argv[])
     std::cout<<x()<<std::endl;
     return 0;
 }
+
+    // int operator()
+    // {
+    //     return 999;
+    // }
