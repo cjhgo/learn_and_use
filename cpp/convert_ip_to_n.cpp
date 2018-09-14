@@ -18,6 +18,7 @@ int main(int argc, char const *argv[])
         {
             int a = std::stoi(temp);
             sip.push_back(bitset<8>(a));  
+            //method 1 ,clean 
             ss<<bitset<8>(a);
             temp="";            
         }
@@ -25,6 +26,7 @@ int main(int argc, char const *argv[])
     cout<<ss.str()<<endl;
     cout<<bitset<32>(ss.str())<<endl;
     cout<<bitset<32>(ss.str()).to_ulong()<<endl;
+    //methond 2 , normal
     for(size_t i = 0; i < sip.size();i++)
     {
         for(size_t j = 0; j< 8;j++)
