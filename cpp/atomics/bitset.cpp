@@ -9,6 +9,8 @@ int main()
 {
   int x=998;
   bitset<32>y(x);
+  bitset<64>why(1099511627776);
+  cout<<why<<endl;
   cout<<y<<endl;
   // 00000000000000000000001111100110
   for(int i = 0; i < y.size();i++)
