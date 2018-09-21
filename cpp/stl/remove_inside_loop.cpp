@@ -1,4 +1,5 @@
 #include<iostream>
+#include<algorithm>
 #include<vector>
 #include<utility>
 using namespace std;
@@ -12,7 +13,8 @@ void print(const vector<int>& v)
 int main(int argc, char const *argv[])
 {
     vector<int> v1={2,3,1,6,4,5,7,11,8,13,9};
-    vector<vector<int>> r;    
+    auto v(v1);
+    vector<vector<int>> r,r2;    
     
     while(v1.size() > 0)
     {
@@ -35,5 +37,29 @@ int main(int argc, char const *argv[])
     print(r[0]);
     print(r[1]);
     print(v1);
+    cout<<"==========\n";
+
+    while(v.size() > 0)
+    {    
+        int max = 0;
+        vector<int> temp;
+        auto end = std::remove_if(v.begin(),
+                            v.end(),
+                            [&max, &temp](int const &i) {
+                                if( i > max )
+                                {
+                                    max = i;
+                                    temp.push_back(i);
+                                    return true;
+                                }
+                                else
+                                return false;                            
+                            });
+        v.erase(end, v.end());
+        r2.push_back(temp);
+    }
+    print(r2[0]);
+    print(r2[1]);
+    print(v);
     return 0;
 }
