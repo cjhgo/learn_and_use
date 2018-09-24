@@ -45,4 +45,11 @@ int main(int argc, char* argv)
     ifstream map_file("a.txt");
     ifstream input("b.txt");
     word_transform(map_file, input);
+    map<string,int> mymap = {
+        {"chen", 5},
+        {"zhao", 8},
+        {"wang", 10}
+    };
+    //mymap.at("liu") = 33;
+    mymap["li"] = 33;
 }

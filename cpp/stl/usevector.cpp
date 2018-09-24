@@ -2,8 +2,8 @@
 #include<vector>
 int main(int argc, char const *argv[])
 {
-	std::vector<double> v;
-	v.resize(4,0);
+	std::vector<double> v(10,5.1);
+	// v.resize(4,0);
 	for(double e : v)
 	{
 		std::cout<<e<<std::endl;
