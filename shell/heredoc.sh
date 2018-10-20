@@ -24,3 +24,8 @@ All the troubles you have will pass \${PWD}
 abc
 comment
 fortune|cowsay
+
+echo ' multile line echo
+Dont look back, the lemmings are gaining on you.
+Abandon the search for Truth; settle for a good fantasy.
+'
