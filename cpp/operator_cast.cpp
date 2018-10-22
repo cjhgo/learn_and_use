@@ -14,23 +14,19 @@ public:
     {
         return 999;
     }
-
     operator A()
     {
-        return A(a);
+        std::cout<<"execute user defined conversion!\n";
+        return A(a+5);
     }
+
 };
 int main(int argc, char const *argv[])
 {
 
     B x(55);
-    A y=x;//(x);
+    A y=x;
     std::cout<<y.a<<std::endl;
     std::cout<<x()<<std::endl;
     return 0;
 }
-
-    // int operator()
-    // {
-    //     return 999;
-    // }
