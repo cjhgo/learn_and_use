@@ -13,8 +13,14 @@ int main(int argc, char const *argv[])
 	{
 		std::cout<<e<<std::endl;
 	}
-	std::cout<<v.size();
+	std::cout<<v.size()<<std::endl;
 	v.clear();
-	std::cout<<v.size();
+	std::cout<<v.size()<<std::endl;
+	v.push_back(0.1);
+	v.push_back(0.3);
+	for(double e : v)
+	{
+		std::cout<<e<<"\t";
+	}
 	return 0;
 }
