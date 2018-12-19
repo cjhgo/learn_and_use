@@ -1,5 +1,5 @@
-#include<iostream>
-#include<pthread.h>
+#include <iostream>
+#include <pthread.h>
 class WWW
 {
 public:
