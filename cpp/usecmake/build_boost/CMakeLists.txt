@@ -55,9 +55,36 @@ set(Boost_LIBRARIES
   ${BOOST_LIBS_DIR}/libboost_date_time.a)
 message(STATUS "Boost libs: " ${Boost_LIBRARIES})  
 
+message(STATUS "line 58: " ${build_boost_SOURCE_DIR})  
+ExternalProject_Add(openmpi
+  PREFIX ${build_boost_SOURCE_DIR}/deps/openmpi
+  URL ${build_boost_SOURCE_DIR}/openmpi-1.4.5.tar.gz
+  CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=<INSTALL_DIR> --disable-mpi-f77
+  INSTALL_DIR ${build_boost_SOURCE_DIR}/deps/local)
+set(MPI_FOUND True)
 
-link_libraries(${Boost_LIBRARIES})
-add_executable(use_boost use_boost.cpp)
-add_dependencies(use_boost boost)
+set(MPI_LIBRARY
+${build_boost_SOURCE_DIR}/deps/local/lib/libmpi.so
+)
+set(MPI_EXTRA_LIBRARY
+${build_boost_SOURCE_DIR}/deps/local/lib/libmpi_cxx.so
+)
+set(MPI_INCLUDE_PATH
+${build_boost_SOURCE_DIR}/deps/local/include
+)
+add_definitions(-DHAS_MPI)
+include_directories(${MPI_INCLUDE_PATH})
+
+
+
+
+message(STATUS "MPI_LIBRARY,,,," ${MPI_LIBRARY})
+message(STATUS "MPI_EXTRA_LIBRARY,,,," ${MPI_EXTRA_LIBRARY})
+message(STATUS "MPI_INCLUDE_PATH,,,," ${MPI_INCLUDE_PATH})
+
+#link_libraries(${Boost_LIBRARIES})
+add_executable(hellompi hellompi.c)
+add_dependencies(hellompi openmpi)
+target_link_libraries(hellompi ${MPI_LIBRARY} ${MPI_EXTRA_LIBRARY})
 # target_link_libraries( use_boost ${Boost_LIBRARIES})
 
