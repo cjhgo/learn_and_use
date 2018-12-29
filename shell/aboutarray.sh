@@ -18,3 +18,5 @@ syncd /home/cjh/project/LazyGraph_all/LazyGraph/src output xls org
 exec &> >(tee -a "$LOG")
 echo Logging output to "$LOG"
 '
+scalability_command=()
+scalability_command+=("command")
