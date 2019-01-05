@@ -22,5 +22,11 @@ int main(int argc, char const *argv[])
 	{
 		std::cout<<e<<"\t";
 	}
+	std::cout<<std::endl;
+	v={1,7,2,8};
+	auto b = v.begin()+2, e = v.begin()+4;
+	std::vector<double> vv(b,e);
+	for(auto e : vv)
+	std::cout<<e<<"\t";
 	return 0;
 }
