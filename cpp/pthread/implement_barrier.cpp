@@ -4,6 +4,7 @@
 #include<condition_variable>
 using namespace std;
 thread_local int local_sense = 0;
+//use lock&while true
 struct barrier_type1
 {
     std::mutex lock;
@@ -52,30 +53,24 @@ struct barrier_type1
         }        
     }
 };
+//use cv&notify
 struct barrier_type2
 {
     std::mutex lock;
     std::condition_variable cv;
     bool flag;
     int arrive_counter;
-    int leave_counter;
     int thread_numb;
     barrier_type2(int n)
-    :thread_numb(n),arrive_counter(0),leave_counter(n)
+    :thread_numb(n),arrive_counter(0)
     {}
     void wait()
-    {
+    {        
         std::unique_lock<std::mutex> lk(lock);
-        if( arrive_counter == 0)
-        {
-            if( leave_counter != thread_numb)
-            {
-                while(leave_counter != thread_numb);
-            }
-        }        
         ++arrive_counter;
         if( arrive_counter == thread_numb)
         {
+            arrive_counter=0;//add this so the barrier object can be reuseable
             cv.notify_all();
         }
         else
@@ -84,6 +79,7 @@ struct barrier_type2
         }
     }
 };
+
 //Sense Reversal
 struct barrier_type3
 {
@@ -118,12 +114,14 @@ static barrier_type3 barrier3(2);
 void foo(int tid)
 {
     std::cout<<"i am the thread "<<tid<<std::endl;
-    barrier3.wait();
+    barrier2.wait();
     std::cout<<"after wait one i am the thread "<<tid+10<<std::endl;
-    barrier3.wait();
+    barrier2.wait();
     std::cout<<"after wait two i am the thread "<<tid+100<<std::endl;
-    barrier3.wait();
+    barrier2.wait();
     std::cout<<"after wait three i am the thread "<<tid+1000<<std::endl<<std::endl;
+    barrier2.wait();
+    std::cout<<"after wait four i am the thread "<<tid+10000<<std::endl<<std::endl;
 }
 int main(int argc, char const *argv[])
 {        
