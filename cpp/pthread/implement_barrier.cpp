@@ -3,6 +3,7 @@
 #include<mutex>
 #include<condition_variable>
 using namespace std;
+thread_local int local_sense = 0;
 struct barrier_type1
 {
     std::mutex lock;
@@ -83,16 +84,45 @@ struct barrier_type2
         }
     }
 };
+//Sense Reversal
+struct barrier_type3
+{
+    std::mutex lock;
+    int exit_flag;
+    int counter;
+    int thread_numb;
+    barrier_type3(int n)
+    :exit_flag(0), thread_numb(n)
+    {}
+    void wait()
+    {
+        local_sense = local_sense == 0 ? 1 : 0;
+        lock.lock();
+        int arrived = (++counter);
+        if( arrived == thread_numb)
+        {
+            lock.unlock();
+            counter=0;
+            exit_flag=local_sense;
+        }
+        else
+        {
+            lock.unlock();
+            while(exit_flag != local_sense);
+        }
+    }
+};
 static barrier_type1 barrier1(2);
 static barrier_type2 barrier2(2);
+static barrier_type3 barrier3(2);
 void foo(int tid)
 {
     std::cout<<"i am the thread "<<tid<<std::endl;
-    barrier1.wait();
+    barrier3.wait();
     std::cout<<"after wait one i am the thread "<<tid+10<<std::endl;
-    barrier1.wait();
+    barrier3.wait();
     std::cout<<"after wait two i am the thread "<<tid+100<<std::endl;
-    barrier1.wait();
+    barrier3.wait();
     std::cout<<"after wait three i am the thread "<<tid+1000<<std::endl<<std::endl;
 }
 int main(int argc, char const *argv[])
