@@ -8,7 +8,6 @@
 void master_code(int num_proces)
 {
     
-    std::cout<<"????\n";
     double**  matrix= new double *[SIZE];
     for(size_t j = 0; j < SIZE; j++)
     matrix[j]=new double[SIZE];
@@ -17,22 +16,17 @@ void master_code(int num_proces)
     double dot_prodcut;
     size_t num_sent=0;
     int sender,row;
-    std::cout<<"????\n";
     MPI_Status mpi_status;
-    int a;
-    std::cin>>a;
     for(size_t i = 0; i < SIZE; i++)
     for(size_t j = 0; j < SIZE; j++)
         matrix[i][j] = (double)j;
     
     
-    std::cout<<"????\n";
     for(size_t k=1; k < std::min(SIZE+1, num_proces); k++)
     {
         MPI_Send(matrix[k-1], SIZE, MPI_DOUBLE, k, k, MPI_COMM_WORLD);
         num_sent++;
     }
-    std::cout<<"????\n";
     for(size_t k=0; k < SIZE; k++)
     {
         MPI_Recv(&dot_prodcut, 1, MPI_DOUBLE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &mpi_status);
@@ -49,8 +43,8 @@ void master_code(int num_proces)
             MPI_Send(MPI_BOTTOM, 0, MPI_DOUBLE, sender, 0, MPI_COMM_WORLD);
         }
     }       
-    for(size_t i = 0; i < SIZE; i++) 
-    std::cout<<res[i]<<std::endl;
+    // for(size_t i = 0; i < SIZE; i++) 
+    // std::cout<<res[i]<<std::endl;
 }
 void slave_code()
 {
@@ -85,7 +79,6 @@ int main(int argc, char * argv[])
 
     if( myrank == 0)
     {
-        std::cout<<"????\n";
         master_code(num_proces);
     }        
     else
