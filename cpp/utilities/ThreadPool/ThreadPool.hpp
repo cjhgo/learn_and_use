@@ -3,8 +3,8 @@
 #include <cstdio>
 typedef void (*FunType)(void);
 struct Task{
-  //std::function<void()> fun;
-  //Task(std::function<void()> fun):fun(fun){};
+  Task(){};
+  Task(FunType fun):fun(fun){};
   FunType fun;
 };
 
