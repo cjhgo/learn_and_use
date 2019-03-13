@@ -5,6 +5,8 @@ void ThreadPool::worker()
 {
   while(true)
   {
+    if(task_queue.empty())
+    std::this_thread::sleep_for(std::chrono::milliseconds(10000));
     Task t;
     if(task_queue.waitAndpop(t))
     {
@@ -25,10 +27,11 @@ void ThreadPool::run()
         //pool.emplace_back([this] { worker(); });
         pool[i]=std::thread([this] { worker(); });
     }
+    for(auto& thread : pool)
+    thread.join();
 }
 
 ThreadPool::~ThreadPool()
 {
-  for(auto& thread : pool)
-  thread.join();
+
 }
