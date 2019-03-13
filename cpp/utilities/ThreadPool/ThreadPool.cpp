@@ -24,8 +24,7 @@ void ThreadPool::run()
 {
     for(std::size_t i = 0; i < thread_cnt; i++)
     {
-        //pool.emplace_back([this] { worker(); });
-        pool[i]=std::thread([this] { worker(); });
+      pool.emplace_back([this] { worker(); });
     }
     for(auto& thread : pool)
     thread.join();

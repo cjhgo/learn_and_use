@@ -17,7 +17,7 @@ public:
   void worker();
   void add(Task t);
   ThreadPool(std::size_t thread_cnt)
-  :thread_cnt(thread_cnt),pool(thread_cnt)
+  :thread_cnt(thread_cnt)
   {};
   ~ThreadPool();
 private:
