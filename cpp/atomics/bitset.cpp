@@ -1,11 +1,12 @@
 #include <bitset>
 #include <iostream>
 #include "dense_bitset.hpp"
+#include "custom_bitset.hpp"
 using namespace std;
 /*
 Printing numbers in binary format in C++
 */
-int main()
+void use_std_bitset()
 {
   int x=998;
   bitset<32>y(x);
@@ -18,8 +19,10 @@ int main()
   cout<<endl;
   // 01100111110000000000000000000000
   // 注意字节序不一样
-  
 
+}
+void use_dense_bitset()
+{
   //denbse_bitset 只输出有效位
   graphlab::fixed_dense_bitset<128> fdb;
   graphlab::dense_bitset db;
@@ -49,5 +52,19 @@ int main()
   cout<<64+e;
 
   cout<<endl;
+}
+void use_custom_bitset()
+{
+  custom_bitset cb;
+  cb.resize(129);
+  cb.set_bit(33);
+  cb.set_bit(69);
+  cb.set_bit(129);
+  cb.print();
+}
+int main()
+{
+  
+  use_custom_bitset();
 
 }
