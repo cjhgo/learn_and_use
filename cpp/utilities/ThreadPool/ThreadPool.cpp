@@ -5,19 +5,28 @@ void ThreadPool::worker()
 {
   while(true)
   {
-    if(task_queue.empty())
-    std::this_thread::sleep_for(std::chrono::milliseconds(10000));
     Task t;
-    if(task_queue.waitAndpop(t))
     {
-        t.fun();
+      std::unique_lock<std::mutex> lock(this->queue_mutex);
+      if( this->task_queue.empty())
+        this->condiation.wait(lock, [this]
+          {
+            return !this->task_queue.empty();
+          });
+      this->task_queue.waitAndpop(t);
     }
+    t.fun();
+    std::cout<<t.taskid<<std::endl;
   }
 }
 
 void ThreadPool::add(Task t)
 {
-  task_queue.push_back(t);
+  {
+    std::unique_lock<std::mutex> lock(this->queue_mutex);
+    task_queue.push_back(t);
+  }
+  this->condiation.notify_one();
 }
 
 void ThreadPool::run()

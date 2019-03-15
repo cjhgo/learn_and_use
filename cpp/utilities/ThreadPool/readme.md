@@ -8,10 +8,12 @@
 
 基本功能描述:
 
-
 + threadpool调用run之后启动用户指定数目的线程
-每个线程都执行一个循环,从任务队列中取任务,执行任务
+每个线程都执行一个循环:从任务队列中取任务,执行任务
+  - 由于池中线程共享任务队列,所以取任务的时候先加锁
+  如果队列为空,就通过条件变量试线程等待队列非空
 + 用户通过add接口向池中添加task或者通过launch接口add&run
+add一个task之后,会通过condition variable来notify_one
 
 + 调度策略
 队列中有N个任务,池中有M个线程,那么就需要调度
@@ -30,6 +32,5 @@ ThreadPool tp;
 tp.add(task)
 
 tp.run();
-tp.join();
 ```
 
