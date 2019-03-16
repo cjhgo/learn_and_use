@@ -30,6 +30,7 @@
 #include <stdint.h>
 #include <cassert>
 #include <iterator>
+#include <bitset>
 namespace graphlab {
   /** 
   * \ingroup util
@@ -463,7 +464,14 @@ namespace graphlab {
       }
       fix_trailing_bits();
     }
-
+    void print()
+    {
+      for(size_t i = 0; i < arrlen; i++)
+      {
+          std::bitset<8*sizeof(size_t)> tmp(array[i]);
+          std::cout<<tmp<<std::endl;
+      }
+    }
   private:
    
     inline static void bit_to_pos(size_t b, size_t& arrpos, size_t& bitpos) {
