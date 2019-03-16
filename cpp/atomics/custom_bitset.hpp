@@ -131,20 +131,30 @@ public:
   };
 
 private:
+  /** 根据全局的bit index算出这一位所在的size_t的index:byte_pos
+      以及这一位在所在的size_t中的index(从右向左数)
+  */
   inline static void bit_to_pos(size_t pos, size_t& byte_pos, size_t& bit_pos)
   {
     byte_pos = pos / (8*sizeof(size_t));
     bit_pos = pos & (8*sizeof(size_t)-1);
   };
+
+  /** 把b的下一个bit的全局index赋值给b,并返回true
+      否则若b后边没有bit了,返回false
+      如果不做fix_trailing_bits处理,要检查index<datalen
+  */
   inline bool next_bit(size_t& b) const
   {
     size_t bit_pos, byte_pos;
     bit_to_pos(b, byte_pos, bit_pos);
     size_t block = array[byte_pos];
     size_t pos = next_bit_in_block(bit_pos, block);
+    //先判断当前block后边有没有bit
     if( pos != 0)
     {
       b = 8*sizeof(size_t)*byte_pos+ pos;
+      //检查index<datalen
       if(b < datalen)
         return true;
       else
@@ -152,6 +162,7 @@ private:
     }
     else
     {
+      //当前block中后边没有bit,则遍历后边的block
       for(size_t i = byte_pos+1; i < arraylen; i++)
       {
         if( array[i])
@@ -170,6 +181,9 @@ private:
     }
     return false;  
   };
+  /** 从右向左数,返回block中b的下一个bit的位置;
+      如果block中后边没有置1的bit了,返回0
+  */
   inline size_t next_bit_in_block(size_t& b, size_t& block) const
   {
     size_t belowselectedbit = size_t(-1) - (((size_t(1) << b) - 1)|(size_t(1)<<b));
@@ -177,12 +191,20 @@ private:
     if (x == 0) return 0;
     else return (size_t)__builtin_ctzl(x);
   };
+
+  /** 从右向左数,返回block中b的第一个bit的位置;
+      因为gcc提供的内建函数就是从右向左开始计数的
+  */  
   inline size_t first_bit_in_block(size_t& block) const
   {
     //std::cout<<(size_t)__builtin_ctzl(block)<<std::endl;
     if (block == 0) return 0;
     else return (size_t)__builtin_ctzl(block);
   };
+
+  /** 把整个bitset中的第一个bit的位置赋值给pos,并返回true
+      否则若bitset中没有bit,返回false
+  */
   inline size_t first_bit(size_t& pos) const
   {
     for(size_t i = 0; i < arraylen; i++)
