@@ -35,10 +35,15 @@ void use_dense_bitset()
     cout<<e<<endl;
   // 0 32 65
 
-  db.resize(32);
+  db.resize(128);
   db.set_bit(1);
   db.set_bit(3);
   db.set_bit(7);
+  db.set_bit(32);
+  db.set_bit(65);
+  db.set_bit(66);
+  db.set_bit(127);
+  db.print();
   for(auto e: db)
     cout<<e<<endl;
   // 1 3 7
@@ -58,13 +63,24 @@ void use_custom_bitset()
   custom_bitset cb;
   cb.resize(129);
   cb.set_bit(33);
+  cb.set_bit(34);
+  cb.set_bit(65);
   cb.set_bit(69);
-  cb.set_bit(129);
+  cb.set_bit(128);
   cb.print();
+  for(auto e: cb)
+  std::cout<<e<<"\t";
+  cb.fill();
+  cb.print();
+  // cb.clear();
+  // cb.print();
+  std::cout<<std::endl<<std::endl;
+  for(auto e: cb)
+  std::cout<<e<<"\t";
 }
 int main()
 {
-  
+  //use_dense_bitset();
   use_custom_bitset();
 
 }
