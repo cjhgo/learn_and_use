@@ -21,5 +21,7 @@ int main(int argc, char const *argv[])
     std::cout<<w.transpose()<<std::endl<<std::endl;
     std::cout<<x.transpose()<<std::endl<<std::endl;
     std::cout<<w.dot(x)<<std::endl<<std::endl;
+    std::cout<<w[0]<<std::endl;
+    a<<1,2,3,4;
     return 0;
 }
