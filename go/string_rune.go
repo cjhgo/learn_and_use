@@ -5,12 +5,13 @@ package main
 */
 import "fmt"
 import "unsafe"
+import u "unicode/utf8" 
 
 func main()  {
   strchen :=`陈`
   runechen :='陈'
   fmt.Printf("%T %d %d\n", strchen,unsafe.Sizeof(strchen), len(strchen))
-  fmt.Printf("%T %d\n", runechen,unsafe.Sizeof(runechen))
+  fmt.Printf("%T %d %d\n", runechen,unsafe.Sizeof(runechen), u.RuneLen(runechen))
   fmt.Printf("%+q\n","\xbd\xb2\x3d\xbc\x20\xe2\x8c\x98") 
 
   fmt.Println("\n演示单引号,双引号,反引号常量\n")
@@ -23,6 +24,16 @@ func main()  {
   fmt.Printf("%T\n", x[0])
   fmt.Printf("%T\n", x[1])
 
+  fmt.Println("\n演示手动创建[]byte,然后转换为string,\n")
+  //string([]byte{0})得到的并不是"0"
+  //string([]byte{48})得到的才是"0"
+  mystr := []byte{0,0,1,2,48,48,233,153,136}
+  fmt.Printf("%q\n",string(mystr))
+  fmt.Printf("%+q\n",string(mystr))
+  fmt.Printf("%+q\n",string([]byte{48}))
+  fmt.Printf("%+q\n",string([]byte{0}))
+
+
   fmt.Println("\n演示如何用Printf格式化字符,避免乱码\n")
   str := "xx陈我"
   fmt.Println(len(str)) //str是一个长度为8byte的slice
@@ -33,7 +44,7 @@ func main()  {
   
 
   for i := 0; i < len(str); i++{
-    fmt.Printf("% x", str[i])
+    fmt.Printf("% x %d ", str[i], str[i])
   }  
   fmt.Println("\n")
   for index, runeValue := range str{
