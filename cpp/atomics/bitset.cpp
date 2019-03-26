@@ -67,6 +67,7 @@ void use_custom_bitset()
   cb.set_bit(65);
   cb.set_bit(69);
   cb.set_bit(128);
+  std::cout<<cb.pop_count()<<std::endl;
   cb.print();
   for(auto e: cb)
   std::cout<<e<<"\t";
