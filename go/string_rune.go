@@ -9,8 +9,12 @@ import u "unicode/utf8"
 
 func main()  {
   strchen :=`陈`
+  strchen2 :=`陈陈陈陈`
   runechen :='陈'
+  fmt.Println("\n演示sizeof string得到的是slice header的size")
   fmt.Printf("%T %d %d\n", strchen,unsafe.Sizeof(strchen), len(strchen))
+  fmt.Printf("%T %d %d\n", strchen2,unsafe.Sizeof(strchen2), len(strchen2))
+  fmt.Println("\n演示rune的size,len")
   fmt.Printf("%T %d %d\n", runechen,unsafe.Sizeof(runechen), u.RuneLen(runechen))
   fmt.Printf("%+q\n","\xbd\xb2\x3d\xbc\x20\xe2\x8c\x98") 
 
@@ -47,7 +51,9 @@ func main()  {
     fmt.Printf("% x %d ", str[i], str[i])
   }  
   fmt.Println("\n")
+  //rune可以直接string(runevalue)
   for index, runeValue := range str{
-    fmt.Printf("%d \t,16进制:%x \t 10进制:%d \t Unicode Value:%#U \t type: %T \t %x \t\n",index, runeValue,runeValue, runeValue, runeValue, str[index])
+    fmt.Printf("%d \t,16进制:%x \t 10进制:%d \t Unicode Value:%#U \t type: %T \t %s \t %x\n",
+    index, runeValue,runeValue, runeValue, runeValue, string(runeValue),str[index])
   }
 }
