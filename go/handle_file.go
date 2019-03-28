@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 )
 
 func main()  {
@@ -12,4 +13,11 @@ func main()  {
 		fmt.Printf("worong!")
 	}
 	fmt.Printf("%s", f)
+	ff,err := os.Create("./cjh")
+	if err != nil{
+		panic(err)
+	}
+	defer ff.Close()
+	ff.WriteString("我是中国人")
+	ff.Sync()
 }
