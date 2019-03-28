@@ -56,4 +56,6 @@ func main()  {
     fmt.Printf("%d \t,16进制:%x \t 10进制:%d \t Unicode Value:%#U \t type: %T \t %s \t %x\n",
     index, runeValue,runeValue, runeValue, runeValue, string(runeValue),str[index])
   }
+
+  fmt.Println(int("1"))
 }
