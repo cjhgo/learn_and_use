@@ -1,6 +1,7 @@
 package main
 
 import "fmt"
+import "sync"
 func main(){
 	ch := make(chan int)
 	numbers := []int{3,4,67,8,9}
@@ -14,5 +15,15 @@ func main(){
 	}
 	for i := 0; i < len(numbers); i++{
 		fmt.Println("receive:",<-ch)
+	}
+	var wg sync.WaitGroup
+	for _,i := range numbers{
+		wg.Add(1)
+		go func(x int){			
+			fmt.Println("print in routine2",x)
+			wg.Done()
+		}(i)
 	}	
+	wg.Wait()
+	fmt.Println("///")
 }
