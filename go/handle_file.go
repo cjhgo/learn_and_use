@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"bufio"
 )
 
 func main()  {
@@ -20,4 +21,11 @@ func main()  {
 	defer ff.Close()
 	ff.WriteString("我是中国人")
 	ff.Sync()
+	ff,err = os.Create("./abc")
+	defer ff.Close()
+	w := bufio.NewWriter(ff)
+	line := fmt.Sprintf("%d\n",333)
+	w.WriteString(line)
+	w.WriteString("方尽快为")
+	w.Flush()
 }
