@@ -1,0 +1,12 @@
+#!/bin/bash
+
+: <<"eof"
+
+eof
+
+outdir="/tmp/cpprun"
+mkdir -p /tmp/cpprun
+filename=$1
+exename=$(basename $filename .cpp)
+g++ $filename -g -o $outdir/$exename
+$outdir/$exename
