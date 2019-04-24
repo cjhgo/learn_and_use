@@ -1,11 +1,38 @@
 
 #include<iostream>
 #include<vector>
-#include<string>
 #include<map>
 #include<memory>
 using namespace std;
 
+class mystring
+{
+public:
+  mystring():data(nullptr){};
+  mystring(const mystring& from)
+  {
+    this->data=new char[5]{'a','b','c','e','1'};
+  }
+  mystring& operator=(mystring rhs)
+  {
+    using std::swap;
+    swap(*this, rhs);
+    return *this;
+  }
+  mystring(mystring&& from) noexcept
+  { 
+    cout<<"\ncall me "<<(void*)from.data;
+    this->data=from.data;
+    from.data=nullptr;
+  }
+  ~mystring()
+  {
+    if(data)
+    delete data;
+  }
+// private:
+  char * data;
+};
 class StrVec
 {
 public:
@@ -15,14 +42,14 @@ public:
   StrVec& operator=(const StrVec&);
   StrVec& operator=(StrVec&&);
   ~StrVec(){free();}
-  void push_back(string& s);
+  void push_back(mystring& s);
   size_t size() const {return firest_free-elements;}
   size_t capacity()const {return cap-elements;}
-  string* begin()const {return elements;}
-  string* end()const {return firest_free;}
+  mystring* begin()const {return elements;}
+  mystring* end()const {return firest_free;}
 private:
-  string* elements,*firest_free,*cap;
-  allocator<string> alloc;
+  mystring* elements,*firest_free,*cap;
+  allocator<mystring> alloc;
   void chk_n_alloc()
   {
     if(size()==capacity())
@@ -32,19 +59,19 @@ private:
     }
       
   };
-  pair<string*,string*> alloc_n_copy(const string*, const string*);
+  pair<mystring*,mystring*> alloc_n_copy(const mystring*, const mystring*);
   void free();
   void reallocate();  
   void show();
 };
 
-void StrVec::push_back(string& s)
+void StrVec::push_back(mystring& s)
 {
   chk_n_alloc();
   alloc.construct(firest_free++, s);
   show();
 }
-pair<string*,string*> StrVec::alloc_n_copy(const string* b, const string* e)
+pair<mystring*,mystring*> StrVec::alloc_n_copy(const mystring* b, const mystring* e)
 {
   auto data = alloc.allocate(e-b);
   return {data, uninitialized_copy(b,e,data)};
@@ -83,7 +110,8 @@ void StrVec::reallocate()
   auto elem = elements;
   for(size_t i = 0; i != size();i++)
   {
-    alloc.construct(dest++, std::move(*elem++));
+    // alloc.construct(dest++, std::move(*elem++));
+    alloc.construct(dest++, *elem++);
   }
   free();
   elements=newdata;
@@ -95,31 +123,24 @@ void StrVec::show()
   cout<<"now show"<<endl;
   for(auto p = elements;p!=firest_free;)
   {
-    cout<<p++<<"\t";
+    cout<<p++<<" "<<(void *)(*p).data<<" "<<*((*p).data)<<"\t";
   }
   cout<<endl;
 }
 int main(int argc, char const *argv[])
 {
   StrVec v;
-  string a = "abc";
+  char * c = new char[5]{'a','b','c','e','1'};
+  cout<<sizeof(c)/sizeof(c[0])<<sizeof(c[0])<<c[3]<<c[5]<<endl;
+  cout<<c<<endl;
+  mystring a;
+  a.data=c;
+  cout<<a.data<<endl;
+  for(size_t i = 0; i < 10; i++)
   v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);  
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);
-  v.push_back(a);  
-  v.push_back(a);  
+  
+  char * y = new char[10];
+  cout<<endl<<(void*)c<<endl<<(void*)y<<endl;
+  
   return 0;
 }
