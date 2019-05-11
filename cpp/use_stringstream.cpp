@@ -50,9 +50,18 @@ void test2()
         //ss.clear();
     }
 }
+
+void test3()
+{
+    stringstream ss("cjh");    
+    ss<<"abc";//此时abc会把构造函数中的cjh覆盖
+    ss<<"123";//此时123会继续输入到ss中
+    cout<<ss.str()<<endl;//最后ss里实际上是abc123
+}
 int main(int argc, char const *argv[])
 {
     test1();
     test2();
+    test3();
     return 0;
 }
