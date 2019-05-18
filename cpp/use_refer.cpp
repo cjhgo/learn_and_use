@@ -1,6 +1,6 @@
 
-#include<iostream>
-
+#include <iostream>
+#include <vector>
 using namespace std;
 
 
@@ -15,5 +15,10 @@ int main(int argc, char const *argv[])
   cout<<x<<endl;
   change(x);
   cout<<x<<endl;
+  vector<int> a{5,6,7,8};
+  cout<<a[1]<<endl;
+  int& a1=a[1];
+  a1 = 99;
+  cout<<a[1]<<endl;
   return 0;
 }
