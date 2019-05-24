@@ -1,0 +1,43 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{color}
+\begin{document}
+
+
+\title{my first document}
+\author{my name}
+\date{\today}
+\maketitle
+
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+
+\section{Introduction}
+This is the Introduction
+
+\textit{some text in italics}
+\section{Methods}
+\subsection{Stage 1}
+\label{sec1}
+the first part of the Methods
+
+{\color{red}this line is yellow}
+
+\subsection{Stag2 }
+the seconde part of the Methods
+
+\begin{enumerate}
+	\item First thing
+	\item Second thing
+	\begin{itemize}
+		\item A sub ting
+		\item Another sub-ting
+	\end{itemize}
+	\item third thing
+\end{enumerate}
+\section{Results}
+Hera are my results.Referring to section \ref{sec1} on page \pageref{sec1}
+\end{document}
