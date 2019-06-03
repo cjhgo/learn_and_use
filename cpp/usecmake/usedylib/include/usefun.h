@@ -1,0 +1,3 @@
+
+
+int usefun(int a);
