@@ -3,11 +3,11 @@
 #include<string>
 #include<map>
 using namespace std;
-static const auto x=[](){
-    std::ios::sync_with_stdio(false);
-    std:cin.tie(nullptr);
-    return nullptr;
-}(); 
+// static const auto x=[](){
+//     std::ios::sync_with_stdio(false);
+//     std:cin.tie(nullptr);
+//     return nullptr;
+// }(); 
 
 
 void const_and_pointer()
@@ -47,6 +47,16 @@ int getsize()
     return d;
 }
 
+void array_dimension()
+{
+    int d = 5;
+    char x[5];
+    int l = getsize();
+    char y[l]{0};
+    std::string z[d];
+    cout<<sizeof(y);
+}
+
 void use_constexpr()
 {
     int d = 22;
@@ -56,16 +66,39 @@ void use_constexpr()
     // int & f = dd;
     const int & f = 3.14;
     cout<<e<<endl;
-    char x[5]{0};
-    int l = getsize();
-    char y[l]{0};
-    cout<<sizeof(y);
+
 }
+
+void change_const()
+{
+    
+    int j = 6;
+    const int a = j;
+    int * p = (int *)&a;
+    *p = 55;
+    cout<<endl<<&a<<"\t"<<p<<"\t"<<*p<<"\t"<<a<<"\t"<<*(&a);    
+
+    const int *pp = &j;
+    int * q = const_cast<int*>(pp);
+    *q = 99;
+    cout<<endl<<j<<endl;
+
+
+    const int k = j;    
+    int* pk = (int*)&k;
+    *pk=88;
+    cout<<endl<<k<<endl;
+
+}
+
+
 int main(int argc, char const *argv[])
 {
     
     const_and_reference();
     const_and_pointer();
     use_constexpr();
+    array_dimension();
+    change_const();
     return 0;
 }
