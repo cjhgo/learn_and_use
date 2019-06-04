@@ -1,5 +1,6 @@
 \documentclass[a4paper,12pt]{article}
 
+\usepackage{newtxtext}
 \usepackage{color}
 \begin{document}
 
@@ -11,8 +12,8 @@
 
 \pagenumbering{roman}
 \tableofcontents
-\newpage
-\pagenumbering{arabic}
+% \newpage
+% \pagenumbering{arabic}
 
 
 \section{Introduction}
@@ -25,7 +26,8 @@ This is the Introduction
 the first part of the Methods
 
 {\color{red}this line is yellow}
-
+\subsubsection{stage1.1}
+is it okay?
 \subsection{Stag2 }
 the seconde part of the Methods
 
@@ -40,4 +42,21 @@ the seconde part of the Methods
 \end{enumerate}
 \section{Results}
 Hera are my results.Referring to section \ref{sec1} on page \pageref{sec1}
+
+
+\def \NAS {National Academy of Science}
+
+i use macro \NAS
+
+
+\begin{tabular}{|r|l|}
+\hline
+7C0 & hexadecimal\\
+3700 & octal\\
+110011 & binary\\
+\hline
+1984 & decimal\\
+\hline
+\end{tabular}
+
 \end{document}
