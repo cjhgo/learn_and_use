@@ -23,13 +23,22 @@ class ObserverB : public Observer
 };
 
 
+
+void test1()
+{
+  
+}
+
 int main(int argc, char const *argv[])
 {
   Observable *obj = new Observable;
-  ObserverA a;
-  ObserverB b;
-  a.observe(obj);
-  b.observe(obj);
+  ObserverA *a = new ObserverA;
+  ObserverB *b = new ObserverB;
+  a->observe(obj);
+  b->observe(obj);
+  obj->notifyObservers();
+  delete a;
+  delete b;
   obj->notifyObservers();
   return 0;
 }
