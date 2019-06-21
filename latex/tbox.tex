@@ -1,0 +1,37 @@
+\documentclass[demo]{report}
+\usepackage{xeCJK}
+
+\usepackage{blindtext}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage[italian]{babel}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usepackage{varwidth}
+\usepackage{capt-of}
+
+\tcbset{enhanced,colback=cyan!5!white,colframe=cyan!75!black,fonttitle=\bfseries}
+
+\begin{document}
+% \newtcolorbox[blend into=figures]{myfigure}[2][]{
+%     float=htb,
+%     blend before title=colon hang,
+%     sharp corners,
+%     colback=white,
+%     colbacktitle=blue!30!black,
+%     title={#2},
+%     every float=\centering,
+%     halign=flush center,
+%     halign lower=flush center,
+%     lower separated=false,
+%     #1}
+\begin{tcolorbox}[every float=\centering]
+    开发商的借款方的数据库双方都反倒是
+
+    \includegraphics[height=0.6\textheight,width=\linewidth]{compile-four.png}
+    \captionof{figure}{Misura della carica elettrica}
+    \label{fig:fig1}
+    
+\end{tcolorbox}
+
+\end{document} 
