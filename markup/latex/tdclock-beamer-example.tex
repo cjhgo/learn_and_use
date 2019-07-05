@@ -1,0 +1,188 @@
+\documentclass[10pt]{beamer}
+%\usepackage[font=Times, timeinterval=10]{tickingclock}
+%\usepackage[font=Cour, timeinterval=10]{tickingclock}
+%\usepackage[font=Helv, timeinterval=30]{tickingclock}
+\usepackage[font=Times,timeinterval=10, timeduration=2.0, timedeath=0, fillcolorwarningsecond=white!60!yellow,
+timewarningfirst=50,timewarningsecond=80,resetatpages=2]{tdclock}
+%\usepackage{times}
+%\usepackage{helvet}
+
+\usetheme{Madrid}
+
+
+\title{An example of using Ticking Digital Clock in Beamer}
+\author{Luis R\'{a}ndez \& Juan I. Montijano}
+\institute[IUMA]{IUMA \\ Universidad de Zaragoza }
+\date{\today}
+
+
+\begin{document}
+
+\frame{\titlepage}
+%\pagereset{-1}
+
+\begin{frame}[t]
+\frametitle{Introduction}
+
+\initclock  % This must be used one time to initialize the clock
+
+We are putting here a clock with the macro  \quad
+\structure{\texttt{$\backslash$tdclock}}:
+
+\bigskip
+
+\tdclock
+
+\bigskip
+
+Before that, the macro \quad  \structure{\texttt{$\backslash$initclock}}
+\quad must have been used (only one time !).
+
+\bigskip
+This document uses the option \structure{\texttt{resetatpages=2}}. This means
+that the crono is reset to zero at page 2.
+
+Below you can see a crono advancing.  Every time you access to this page,
+the crono should be reset to 0 (the output is updated every 10 seconds, as indicated
+with the option \structure{\texttt{timeinterval=10}}, so it could appear
+some non zero seconds, not greater than 10)
+
+\bigskip
+Crono: \quad\cronominutes\pdfcolon\cronoseconds
+
+\bigskip
+
+Wait some seconds until you see the crono advancing, then go to the next page, go back
+to this page again and wait some seconds to see
+how the crono is reset.
+
+\end{frame}
+
+% This is an example of inserting
+% the clock at the place reserved to the date, the foot line in the
+% case of Madrid theme.
+%
+
+\date{\tddate\ \ \tdtime}
+
+\begin{frame}
+
+
+Here we have inserted the clock at the place reserved to the date, the foot line in the case of Madrid theme.
+
+\medskip
+
+To do that, we have redefined the date contents with the order
+\medskip
+
+\centerline{\structure{\texttt{$\backslash$date\{$\backslash$tddate$\backslash$ $\backslash$ $\backslash$tdtime\}}} }
+
+\medskip
+
+Note that color and font size are adjusted according to the theme.
+
+\medskip
+
+Look at the foot!, the clock must be running.
+
+\end{frame}
+
+\begin{frame}
+
+
+Next, we have inserted a button to toggle between clock and stopwatch,
+and a button to reset the stopwatch to zero.
+
+\medskip
+\toggleclock{\beamerbutton{toggle}}
+\tdtime
+\resetcrono{\beamerbutton{reset}}
+
+\medskip
+
+Click at the left button, see what happens (you must wait 10 seconds),
+then click at the right button and see the result.
+Finally, click at the left button again to recover the current time
+
+\bigskip
+
+To do that, we have used
+
+\medskip
+
+\structure{
+\texttt{$\backslash$toggleclock\{$\backslash$beamerbutton\{toggle\}\}} \\%
+\texttt{$\backslash$tdtime} \\
+\texttt{$\backslash$resetcrono\{$\backslash$beamerbutton\{reset\}\}}
+}
+
+\end{frame}
+
+%
+% Here we change the colors and size of the clock
+
+\begin{frame}
+
+Here we change the color and size of the clock with
+standard \LaTeX commands.
+
+\structure{\texttt{$\backslash$textcolor\{blue\}\{$\backslash$Large $\backslash$tdhours.$\backslash$tdminutes\}\}}}: %
+\textcolor{green}{\Large \tdhours.\tdminutes}
+
+\bigskip
+
+Here a huge yellow clock showing only hours and minutes, inside a red box
+
+\structure{$\backslash$hhmm $\backslash$factorclockfont\{6.0\} $\backslash$tdtime}
+
+\begin{center}
+\colorbox{red}{\color{yellow} \hhmm \factorclockfont{6.0} \tdtime}
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+
+\centerline{Time-Date-Crono macros}
+\begin{tabular}{|l|l|l|}
+\hline
+ \structure{$\backslash$initclock}        &                                      & initialize  clock   \\ \hline
+ \structure{$\backslash$tickingclock}     & \tdclock                        & complete clock  \\ \hline
+ \structure{$\backslash$tickingtime}      & \tdtime                         & current time    \\ \hline
+ \structure{$\backslash$tickingdate}      & \tddate                         & current date    \\ \hline
+ \structure{$\backslash$tickingday}       & \tdday                          & current day     \\\hline
+ \structure{$\backslash$tickingmonth}     & \tdmonth                        & current month   \\\hline
+ \structure{$\backslash$tickingyear}      & \tdyear                         & current year    \\\hline
+ \structure{$\backslash$tickinghours}     & \tdhours                        & current hours   \\\hline
+ \structure{$\backslash$tickingminutes}   & \tdminutes                      & current minutes \\\hline
+ \structure{$\backslash$tickingseconds}   & \tdseconds                      & current seconds \\\hline
+ \structure{$\backslash$crono}            & \crono                               & stopwatch       \\ \hline
+ \structure{$\backslash$cronohours}       & \cronohours                          & crono hours   \\\hline
+ \structure{$\backslash$cronominutes}     & \cronominutes                        & crono minutes \\\hline
+ \structure{$\backslash$cronoseconds}     & \cronoseconds                        & crono seconds \\\hline
+ \structure{$\backslash$resetcrono}       & \resetcrono{\beamerbutton{reset}}     & sets crono time to zero    \\\hline
+ \structure{$\backslash$toggleclock}      & \toggleclock{\beamerbutton{toggle}}    & toggle time-crono   \\\hline
+\end{tabular}
+
+\end{frame}
+
+\begin{frame}
+
+\centerline{Formatting macros}
+\begin{tabular}{|l|l|l|}
+\hline
+ \structure{$\backslash$hhmm}             & \hhmm\tdtime                    & format time   \\ \hline
+ \structure{$\backslash$hhmmss}           & \hhmmss\tdtime                  & format time   \\ \hline
+ \structure{$\backslash$mmddyyyy}         & \mmddyyyy\tddate                & format date   \\ \hline
+ \structure{$\backslash$ddmmyyyy}         & \ddmmyyyy\tddate                & format date   \\ \hline
+ \structure{$\backslash$dateseparator}    & \def\dateseparator{--}\tddate   & separator for date   \\ \hline
+ \structure{$\backslash$timeseparator}    & \def\timeseparator{.}\tdtime    & separator for time   \\ \hline
+ \structure{$\backslash$pdfslash}         & \pdfslash                            & slash in pdf font  \\ \hline
+ \structure{$\backslash$pdfcolon}         & \pdfcolon                            & colon in pdf font   \\ \hline
+ \structure{$\backslash$factorclockfont\{factor\}}     & \factorclockfont{2.0}\tdtime          & format date   \\ \hline
+\end{tabular}
+
+\end{frame}
+
+\end{document}
+

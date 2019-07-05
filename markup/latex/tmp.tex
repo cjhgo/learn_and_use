@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+\usepackage{xeCJK}
+\setCJKmainfont{KaiTi}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+
+\newenvironment{twenty}{%
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+}{%
+	\end{tabular*}
+}
+
+\newcommand{\twentyitem}[4]{%
+	\parbox[t]{0.83\textwidth}{%
+		\textbf{#2}%
+		\hfill%
+		{\footnotesize#3}\\%
+		#4\vspace{\parsep}%
+	}\\
+}
+
+\begin{document}
+\tableofcontents
+
+\section{section}
+\subsection{subsection}
+\subsubsection{subsubsection}
+\paragraph{paragraph}
+
+\leavevmode\\
+
+这是一行正常的文字这是一行正常的文字这是一行正常的文字\\
+\begin{twenty}
+  \twentyitem
+  {yu}{d}{d}{d}
+  \twentyitem
+  {}{a}{a}{a}
+\end{twenty}
+
+{Lei Wang, Liangji Zhuang, \textit{\textbf{Junhang Chen}}, et al.\\}
+
+$\cdots$
+
+
+{
+  line1\\
+  \\
+  line2
+}
+
+{\tiny 沉淀的}
+\begin{huge}
+  
+
+\begin{flushleft}
+  First (heading) line\\[\baselineskip]
+  \leavevmode\\
+  body of the centerd text...
+\end{flushleft}
+\end{huge}
+
+{\fontsize{40}{48} \selectfont 发送到尽快发的是}
+这里的的字号是多少
+
+{\fontsize{12}{200} \selectfont 
+发送到尽快发的是这里的的字号是多少\\
+fdsjsdfkfds艰苦奋斗接口fdsjsdfkfds艰苦奋斗接口fdsjsdfkfds艰苦奋斗接口\\
+fdsjsdfkfds艰苦奋斗接口fdsjsdfkfds艰苦奋斗接口
+}
+
+
+一行文字一行文字
+shi kait 是开通吗
+\bigskip
+有一行\\
+
+合理
+
+不合理
+
+      过故人庄\\
+
+青山绕北郭
+\end{document}

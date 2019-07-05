@@ -1,0 +1,57 @@
+\documentclass[12pt]{beamer}
+
+\usepackage{pgfpages}
+
+% These slides also contain speaker notes. You can print just the slides,
+% just the notes, or both, depending on the setting below. Comment out the want
+% you want.
+
+%\setbeameroption{hide notes} % Only slides
+%\setbeameroption{show only notes} % Only notes
+\setbeameroption{show notes on second screen=right} % Both
+
+% To give a presentation with the Skim reader (http://skim-app.sourceforge.net) on OSX so
+% that you see the notes on your laptop and the slides on the projector, do the following:
+% 
+% 1. Generate just the presentation (hide notes) and save to slides.pdf
+% 2. Generate onlt the notes (show only nodes) and save to notes.pdf
+% 3. With Skim open both slides.pdf and notes.pdf
+% 4. Click on slides.pdf to bring it to front.
+% 5. In Skim, under "View -> Presentation Option -> Synhcronized Noted Document"
+%    select notes.pdf.
+% 6. Now as you move around in slides.pdf the notes.pdf file will follow you.
+% 7. Arrange windows so that notes.pdf is in full screen mode on your laptop
+%    and slides.pdf is in presentation mode on the projector.
+
+% Give a slight yellow tint to the notes page
+\setbeamertemplate{note page}{\pagecolor{yellow!5}\insertnote}\usepackage{palatino}
+
+\title{How to make Beamer slides with notes}
+\author{Andrej Bauer\\University of Ljubljana}
+\date{\small Planet Earth}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+
+  \note[item]{Thank the audience for being awake.}
+\end{frame}
+
+\begin{frame}
+
+  \begin{itemize}
+  \item Here are
+  \item some very boring bullets
+  \item about nothing.
+  \end{itemize}
+  
+  \note[item]{Note that this slide is boring.}
+
+  \note[item]{Observe that there are no actual bullets here.}
+
+  \note[item]{Future work: add another bullet.}
+\end{frame}
+
+
+\end{document}

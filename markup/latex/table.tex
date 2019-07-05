@@ -3,10 +3,24 @@
 \usepackage{wasysym}
 
 
+\usepackage{tabularx} % in the preamble
 \begin{document}
 
 
+
 陈军航
+\section{简况}
+
+% ....
+\begin{tabularx}{\textwidth}{X|l}
+  \textbf{Symptom} & \textbf{Metric} \\
+\hline
+Class that has many accessor methods and accesses a lot of external data & ATFD is more than a few\\
+Class that is large and complex & WMC is high\\
+Class that has a lot of methods that only operate on a proper subset of the instance variable set & TCC is low\\
+\end{tabularx}
+
+接发大水开发大上
 
 
 \begin{tabular}{|l|l|l|l|l|l|}
