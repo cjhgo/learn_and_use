@@ -3,6 +3,11 @@
 #include<iterator>
 #include<iostream>
 using namespace std;
+
+
+typedef std::vector<int> MyType;
+typedef std::vector<int>::iterator MyTypeIterator;
+
 int main(int argc, char const *argv[])
 {
     vector<int> v = {1,2,3,4};
@@ -17,5 +22,16 @@ int main(int argc, char const *argv[])
     string copy;
     reverse_copy(s.begin(),s.end(), inserter(copy,copy.begin()));
     cout<<"\n...\n"<<s<<"\n"<<copy<<endl;
+
+
+    MyType mt = {1,2,3,4};
+    MyTypeIterator mti = mt.begin()+1;
+    std::cout<<*mti<<std::endl;
+    // typename MyTypeIterator::reference val = *mti;
+    MyTypeIterator::reference val = *mti;
+    std::cout<<val<<endl;
+    val = 33;
+    std::cout<<*mti<<std::endl;
+    typename MyTypeIterator::iterator_category jj;    
     return 0;
 }
