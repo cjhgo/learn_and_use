@@ -18,6 +18,15 @@ void funfoo()
     cout<<"!!!"<<array[0]<<endl;
 }
 
+class Barr
+{
+public:    
+  std::vector<int> vv={1,2,3};
+  Barr(){};//这种情况vv根据类内初始化
+  Barr(int v):vv{4,5,6}{};//这种情况成员列表初始化优先级高于类内初始化
+};
+
+
 class Fuu
 {
 public:
@@ -62,5 +71,7 @@ int main(int argc, char const *argv[])
     //Foo::vvv[0] = 10; error
     Fuu fu;
     funfoo();
+    Barr b, bb(3);
+    std::cout<<b.vv[0]<<"\t"<<bb.vv[0]<<std::endl;
     return 0;
 }
