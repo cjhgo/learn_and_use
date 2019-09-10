@@ -27,14 +27,26 @@ public:
     /**
      * 输入一行未知个数的整数
      * 最后一个数要紧跟着\n结尾,中间不能有空格,否则不能正确处理
-     */
+    下面这种写法还是错误的! 它会吞掉一个第一个数字位
     int temp;
     while (cin.get()!='\n')
     {
         cin>>temp;
         A.push_back(temp);
         cnt++;
-    }  
+    }
+    应该使用下边这种方法,当然它会以一个紧跟着数字的\n为结束标志
+    如果一个数组后边跟了空格,又跟了\n那么,不会被认为输入结束
+    **/ 
+   vector<int> A;
+   int temp; 
+    while (cin>>temp)
+    {
+        A.push_back(temp);
+        if(cin.get() == '\n')
+        break;
+    }
+    
     /* 1. 输入不说明有多少个 Input，以 EOF 为结束标志*/
         int a, b;
         // C 方式
