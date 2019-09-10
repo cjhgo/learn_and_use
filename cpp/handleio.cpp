@@ -22,6 +22,19 @@
 class Solution {
 public:
     void foo() {
+
+
+    /**
+     * 输入一行未知个数的整数
+     * 最后一个数要紧跟着\n结尾,中间不能有空格,否则不能正确处理
+     */
+    int temp;
+    while (cin.get()!='\n')
+    {
+        cin>>temp;
+        A.push_back(temp);
+        cnt++;
+    }  
     /* 1. 输入不说明有多少个 Input，以 EOF 为结束标志*/
         int a, b;
         // C 方式
