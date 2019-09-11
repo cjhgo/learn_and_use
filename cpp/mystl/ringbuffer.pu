@@ -1,0 +1,16 @@
+@startuml
+
+
+class RingBuffer
+{
+
++ bool push(int val)
++ bool pop(int& val)
+-data:int[]//存放数据
+-capacity:int//记录容量
+-size:int//记录实际长度
+-head:int//用于pop
+-tail:int//用于push
+}
+
+@enduml
